@@ -105,6 +105,10 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Class methods
 
 + (MB_INSTANCETYPE)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
+    MBProgressHUD *hud0 = [self HUDForView:view];
+    if (hud0!=nil){
+        return hud0;
+    }
 	MBProgressHUD *hud = [[self alloc] initWithView:view];
 	[view addSubview:hud];
 	[hud show:animated];
@@ -117,7 +121,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		hud.removeFromSuperViewOnHide = YES;
 		[hud hide:animated];
 		return YES;
-	}
+	}else{
+        NSLog(@"hud is nil!");
+    }
 	return NO;
 }
 
